@@ -7,14 +7,14 @@
 		<style>
 			body {
 				margin: 0px;
-				background-color: #000000;
+				background-color: #0000ff;
 				overflow: hidden;
 			}
 		</style>
 	</head>
 	<body>
 
-		<script src="../build/three.js"></script>
+		<script src="../build/three_simple_cube.js"></script>
 
 		<script>
 
@@ -31,20 +31,20 @@
 
 				scene = new THREE.Scene();
 
-				var texture = new THREE.TextureLoader().load( 'textures/crate.gif' );
+				//var texture = new THREE.TextureLoader().load( 'textures/crate.gif' );
 
-				var geometry = new THREE.BoxBufferGeometry( 200, 200, 200 );
-				var material = new THREE.MeshBasicMaterial( { map: texture } );
+				//var geometry = new THREE.BoxBufferGeometry( 300, 200, 100 );
+				var geometry = new THREE.BoxGeometry( 300, 200, 100 );
+				//var material = new THREE.MeshBasicMaterial( { map: texture } );
 
-				mesh = new THREE.Mesh( geometry, material );
+				//mesh = new THREE.Mesh( geometry, material );
+				mesh = new THREE.Mesh( geometry );
 				scene.add( mesh );
 
 				renderer = new THREE.WebGLRenderer();
 				renderer.setPixelRatio( window.devicePixelRatio );
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				document.body.appendChild( renderer.domElement );
-
-				//
 
 				window.addEventListener( 'resize', onWindowResize, false );
 
@@ -63,8 +63,8 @@
 
 				requestAnimationFrame( animate );
 
-				mesh.rotation.x += 0.005;
-				mesh.rotation.y += 0.01;
+				//mesh.rotation.x += 0.005;
+				//mesh.rotation.y += 0.01;
 
 				renderer.render( scene, camera );
 

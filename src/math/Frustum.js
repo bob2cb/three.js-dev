@@ -7,7 +7,16 @@ import { Plane } from './Plane';
  * @author alteredq / http://alteredqualia.com/
  * @author bhouston / http://clara.io
  */
-
+/* 
+///Frustum对象的构造函数.用来在三维空间内创建一个平截头体对象.Frustum对象的功能函数采用 
+///定义构造的函数原型对象来实现,平截头体由6个平面对象构成. 
+*/  
+///<param name ="p0" type="THREE.Plane">组成平截头体的面p0</param>  
+///<param name ="p1" type="THREE.Plane">组成平截头体的面p1</param>  
+///<param name ="p2" type="THREE.Plane">组成平截头体的面p2</param>  
+///<param name ="p3" type="THREE.Plane">组成平截头体的面p3</param>  
+///<param name ="p4" type="THREE.Plane">组成平截头体的面p4</param>  
+///<param name ="p5" type="THREE.Plane">组成平截头体的面p5</param>  
 function Frustum( p0, p1, p2, p3, p4, p5 ) {
 
 	this.planes = [
@@ -59,7 +68,12 @@ Object.assign( Frustum.prototype, {
 		return this;
 
 	},
-
+    /* 
+    ///setFromMatrix方法通过对当前平截头体应用变换,返回新的平截头体. 
+    */  
+    ///<summary>setFromMatrix</summary>  
+    ///<param name ="m" type="Matrix4">4x4矩阵</param>  
+    ///<returns type="Frustum">返回新的平截头体</returns
 	setFromMatrix: function ( m ) {
 
 		var planes = this.planes;

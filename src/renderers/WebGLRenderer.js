@@ -420,7 +420,7 @@ function WebGLRenderer( parameters ) {
 
 		_width = width;
 		_height = height;
-
+		//_pixelRatio为2，1个css像素对应2个屏幕物理像素，所以_canvas要变大一些
 		_canvas.width = width * _pixelRatio;
 		_canvas.height = height * _pixelRatio;
 
@@ -1123,7 +1123,7 @@ function WebGLRenderer( parameters ) {
 		_currentCamera = null;
 
 		// update scene graph
-
+		//更新所有child的matrix；
 		if ( scene.autoUpdate === true ) scene.updateMatrixWorld();
 
 		// update camera matrices and frustum
@@ -1135,14 +1135,17 @@ function WebGLRenderer( parameters ) {
 			camera = vr.getCamera( camera );
 
 		}
-
+		//gl_Position = u_ProjMatrix * u_ViewMatrix * u_ModelMatrix * a_Position
+		//u_ViewMatrix.setLookAt(0.8,0.2,0.2,0.0,0.0,1.0,0.0,1.0,0.0);
+		//camera.matrixWorldInverse就是u_ViewMatrix,相机在世界中的姿态，就是世界在相机中的姿态的逆过程
 		_projScreenMatrix.multiplyMatrices( camera.projectionMatrix, camera.matrixWorldInverse );
+		//setFromMatrix方法通过对当前平截头体应用变换,返回新的平截头体. 
 		_frustum.setFromMatrix( _projScreenMatrix );
 
 		lights.length = 0;
 		sprites.length = 0;
 		lensFlares.length = 0;
-
+		//加载cube例子中，_localClippingEnabled和_clippingEnabled都 = false；
 		_localClippingEnabled = this.localClippingEnabled;
 		_clippingEnabled = _clipping.init( this.clippingPlanes, _localClippingEnabled, camera );
 
@@ -1184,7 +1187,7 @@ function WebGLRenderer( parameters ) {
 			renderTarget = null;
 
 		}
-
+		//用途Render Texture？
 		this.setRenderTarget( renderTarget );
 
 		//
@@ -1341,9 +1344,9 @@ function WebGLRenderer( parameters ) {
 					object.skeleton.update();
 
 				}
-
+				//object.frustumCulled如果为真，那么在相机视界之外会被剔除，默认为真
 				if ( ! object.frustumCulled || _frustum.intersectsObject( object ) ) {
-
+					//sortObjects为ture，要进行z轴排序；
 					if ( sortObjects ) {
 
 						_vector3.setFromMatrixPosition( object.matrixWorld )

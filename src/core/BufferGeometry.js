@@ -24,7 +24,7 @@ function BufferGeometry() {
 
 	this.name = '';
 	this.type = 'BufferGeometry';
-
+	//存储顶点索引this.index = Uint16BufferAttribute
 	this.index = null;
 	this.attributes = {};
 

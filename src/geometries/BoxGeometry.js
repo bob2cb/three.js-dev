@@ -53,7 +53,7 @@ function BoxBufferGeometry( width, height, depth, widthSegments, heightSegments,
 	var scope = this;
 
 	// segments
-
+	//类似if (widthSegments == null) widthSegments = 1
 	widthSegments = Math.floor( widthSegments ) || 1;
 	heightSegments = Math.floor( heightSegments ) || 1;
 	depthSegments = Math.floor( depthSegments ) || 1;

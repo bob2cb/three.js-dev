@@ -11,7 +11,17 @@ import { Vector2 } from '../math/Vector2';
  */
 
 var textureId = 0;
-
+///<summary>Texture</summary>  
+///<param name ="image" type="Image">JavaScript Image类型对象</param>  
+///<param name ="mapping" type="Number">映射模式,可用常量参考下面注释</param>  
+///<param name ="wrapS" type="Number">S方向覆盖模式,可用常量参考下面注释</param>  
+///<param name ="wrapT" type="Number">T方向覆盖模式,可用常量参考下面注释</param>  
+///<param name ="magFilter" type="Number">纹理在放大时的过滤方式,可用常量参考下面注释</param>  
+///<param name ="minFilter" type="Number">纹理在缩小时的过滤方式,可用常量参考下面注释</param>  
+///<param name ="format" type="Number">像素数据的颜色格式,可用常量参考下面注释</param>  
+///<param name ="type" type="Number">数据类型,默认为不带符号8位整形值</param>  
+///<param name ="anisotropy" type="Float">各向异性,取值范围0.0-1.0,经常用来通过这个值,产生不同的表面效果,木材和金属都发光,但是发光的特点是有区别的.</param>  
+///<returns type="Texture">返回创建的纹理对象</returns>  
 function Texture( image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy, encoding ) {
 
 	Object.defineProperty( this, 'id', { value: textureId ++ } );
@@ -22,7 +32,7 @@ function Texture( image, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 
 	this.image = image !== undefined ? image : Texture.DEFAULT_IMAGE;
 	this.mipmaps = [];
-
+	//映射模式,有THREE.UVMapping平展映射,THREE.CubeReflectionMapping 立方体反射映射,THREE.CubeRefractionMapping立方体折射映射,THREE.SphericalReflectionMapping球面反射映射,THREE.SphericalRefractionMapping球面折射映射.  
 	this.mapping = mapping !== undefined ? mapping : Texture.DEFAULT_MAPPING;
 
 	this.wrapS = wrapS !== undefined ? wrapS : ClampToEdgeWrapping;
@@ -40,8 +50,12 @@ function Texture( image, mapping, wrapS, wrapT, magFilter, minFilter, format, ty
 	this.repeat = new Vector2( 1, 1 );
 
 	this.generateMipmaps = true;
+	//预乘Alpha值,如果设置为true,纹素的rgb值会先乘以alpha值,然后在存储.  
 	this.premultiplyAlpha = false;
 	this.flipY = true;
+	//valid values: 1, 2, 4, 8 (see http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml)  
+    // 默认值是4。指定用于在内存中的每个像素行开始校准要求。  
+    // 允许的值是1（字节对齐），2（行对齐，偶数字节），4（对齐），和8（行开始在双字的边界）。更多信息见glpixelstorei。  
 	this.unpackAlignment = 4;	// valid values: 1, 2, 4, 8 (see http://www.khronos.org/opengles/sdk/docs/man/xhtml/glPixelStorei.xml)
 
 	// Values of encoding !== THREE.LinearEncoding only supported on map, envMap and emissiveMap.

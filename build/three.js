@@ -14528,7 +14528,7 @@
 		};
 
 		this.fromBufferGeometry( new BoxBufferGeometry( width, height, depth, widthSegments, heightSegments, depthSegments ) );
-		this.mergeVertices();
+		this.mergeVertices()
 
 	}
 

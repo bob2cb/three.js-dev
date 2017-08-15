@@ -115,7 +115,7 @@ function WebGLRenderList() {
 	}
 
 	function finish() {
-
+		//没明白为什么需要多此一举
 		opaque.length = opaqueLastIndex + 1;
 		transparent.length = transparentLastIndex + 1;
 

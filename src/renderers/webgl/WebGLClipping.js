@@ -24,7 +24,7 @@ function WebGLClipping() {
 	this.numIntersection = 0;
 
 	this.init = function( planes, enableLocalClipping, camera ) {
-
+		//加载cube例子中，enabled = false，globalState = null，numGlobalPlanes = 0；
 		var enabled =
 			planes.length !== 0 ||
 			enableLocalClipping ||
@@ -34,7 +34,7 @@ function WebGLClipping() {
 			localClippingEnabled;
 
 		localClippingEnabled = enableLocalClipping;
-
+		//加载cube例子中，globalState = null；
 		globalState = projectPlanes( planes, camera, 0 );
 		numGlobalPlanes = planes.length;
 
