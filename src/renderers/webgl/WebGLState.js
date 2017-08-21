@@ -441,9 +441,13 @@ function WebGLState( gl, extensions, paramThreeToGL ) {
 		}
 		//不明白？？？？？
 		if ( attributeDivisors[ attribute ] !== 0 ) {
-
+			//ANGLE_instanced_arrays是属于 WebGL API 的一个扩展API，
+			//如果使用它们提供了相同的顶点数据或者是原始的数目和类型的话，就可以绘制相同的对象或是被多次使用的相似的对象组
+			//尽管名字叫“ANGLE”，但如果硬件支持，它可以运行在任意设备上，而不仅只是在使用了ANGLE库Windows上起作用。 
+			//"ANGLE"只是表明了这个扩展是被ANGLE这个库的作者书写的，并没有其他什么含义。
+			//这个扩展暴露了一个常量ext.VERTEX_ATTRIB_ARRAY_DIVISOR_ANGLE，
+			//它能被 gl.getVertexAttrib() 这个方法作为pname参数所使用，将返回一个用于实例渲染的频率因子GLint。
 			var extension = extensions.get( 'ANGLE_instanced_arrays' );
-
 			extension.vertexAttribDivisorANGLE( attribute, 0 );
 			attributeDivisors[ attribute ] = 0;
 
@@ -820,7 +824,8 @@ function WebGLState( gl, extensions, paramThreeToGL ) {
 		}
 
 	}
-
+	//webglType的参数是gl.TEXTURE_2D或gl.TEXTURE_CUBE_MAP
+	//webglTexture = gl.createTexture();
 	function bindTexture( webglType, webglTexture ) {
 
 		if ( currentTextureSlot === null ) {

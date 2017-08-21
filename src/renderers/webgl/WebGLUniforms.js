@@ -7,19 +7,20 @@
  *
  *
  * Properties of inner nodes including the top-level container:
- *
+ * 嵌套的uniforms数组
  * .seq - array of nested uniforms
+ * 按名字索引的嵌套的uniforms数组
  * .map - nested uniforms by name
  *
- *
+ * 顶层容器下面节点的方法
  * Methods of all nodes except the top-level container:
- *
+ * 新增一个uniform，value，图片采样需要第三个参数
  * .setValue( gl, value, [renderer] )
  *
  * 		uploads a uniform value(s)
  *  	the 'renderer' parameter is needed for sampler uniforms
  *
- *
+ * 顶层容器的静态方法
  * Static methods of the top-level container (renderer factorizations):
  *
  * .upload( gl, seq, values, renderer )
@@ -30,7 +31,7 @@
  *
  * 		filters 'seq' entries with corresponding entry in values
  *
- *
+ * 顶层容器的方法
  * Methods of the top-level container (renderer factorizations):
  *
  * .setValue( gl, name, value )
@@ -411,7 +412,22 @@ StructuredUniform.prototype.setValue = function ( gl, value ) {
 // --- Top-level ---
 
 // Parser - builds up the property tree from the path strings
+//正则表达式注释
 
+//g
+//表达式加上参数g之后，表明可以进行全局匹配。代表第一次执行返回第一个匹配，再执行返回第二个匹配，否则永远都返回第一个匹配，例子
+//var regx=/user\d/; 
+//var str=“user18dsdfuser2dsfsd”; 
+//var rs=regx.exec(str);//此时rs的值为{user1} 
+//var rs2=regx.exec(str);//此时rs的值依然为{user1} 
+//如果regx=/user\d/g；则rs的值为{user1}，rs2的值为{user2} 
+//通过这个例子说明：对于exec方法，表达式加入了g，并不是说执行exec方法就可以返回所有的匹配，
+//而是说加入了g之后，我可以通过某种方式得到所有的匹配，这里的“方式”对于exec而言，就是依次执行这个方法即可。 
+
+
+
+//[]内的内容只匹配一个字符,([\w\d])和(\w)的意义应该是一样的?
+//添加分组界符(),匹配结果数组的第一个元素是匹配内容 第二个元素是捕获组1捕获的内容
 var RePathPart = /([\w\d_]+)(\])?(\[|\.)?/g;
 
 // extracts

@@ -119,7 +119,7 @@ function fetchAttributeLocations( gl, program, identifiers ) {
 	var n = gl.getProgramParameter( program, gl.ACTIVE_ATTRIBUTES );
 
 	for ( var i = 0; i < n; i ++ ) {
-
+		//当我们在shader里定义了一个变量，但是代码里却没见它有什么作为，就说它是非活动的
 		var info = gl.getActiveAttrib( program, i );
 		var name = info.name;
 

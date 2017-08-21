@@ -73,6 +73,7 @@ function WebGLCapabilities( gl, extensions, parameters ) {
   		gl_FragDepthEXT = 0.5; 
 	}
 	*/
+	//用Logarithmic Depth Buffer，需要对每个物体在shader中计算其对数深度
 	var logarithmicDepthBuffer = parameters.logarithmicDepthBuffer === true && !! extensions.get( 'EXT_frag_depth' );
 
 	var maxTextures = gl.getParameter( gl.MAX_TEXTURE_IMAGE_UNITS );

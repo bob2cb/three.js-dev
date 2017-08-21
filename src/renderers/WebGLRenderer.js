@@ -47,12 +47,17 @@ function WebGLRenderer( parameters ) {
 
 	var _canvas = parameters.canvas !== undefined ? parameters.canvas : document.createElementNS( 'http://www.w3.org/1999/xhtml', 'canvas' ),
 		_context = parameters.context !== undefined ? parameters.context : null,
-
+		//如果它的值是 true，它提供了一个alpha缓冲区到画布上。默认情况下，它的值是 true
 		_alpha = parameters.alpha !== undefined ? parameters.alpha : false,
+		//如果它的值是true，会得到一个绘图的缓冲区，其中包含至少16位的深度缓冲。默认情况下，它的值是true
 		_depth = parameters.depth !== undefined ? parameters.depth : true,
+		//如果它的值是true，会得到一个绘图的缓冲区，其中包含至少8位的模板缓存。默认情况下，它的值是false
 		_stencil = parameters.stencil !== undefined ? parameters.stencil : true,
+		//如果它的值是true，会得到一个绘图缓冲区，执行抗锯齿。默认情况下，它的值是true
 		_antialias = parameters.antialias !== undefined ? parameters.antialias : false,
+		//如果它的值是true，会得到一个绘图缓冲区，其中包含的颜色与预乘alpha。默认情况下它的值是true
 		_premultipliedAlpha = parameters.premultipliedAlpha !== undefined ? parameters.premultipliedAlpha : true,
+		//如果它的值是true，缓冲区将不会被清零，直到被清除或由作者改写将保留它们的值。默认情况下，它的值是false
 		_preserveDrawingBuffer = parameters.preserveDrawingBuffer !== undefined ? parameters.preserveDrawingBuffer : false;
 
 	var lights = [];
@@ -95,8 +100,7 @@ function WebGLRenderer( parameters ) {
 
 	this.physicallyCorrectLights = false;
 
-	// tone mapping
-
+	// tone mapping =色调映射，简单来说，HDR的目的就是模拟相机的曝光，而ToneMapping则是实现的一种手段。
 	this.toneMapping = LinearToneMapping;
 	this.toneMappingExposure = 1.0;
 	this.toneMappingWhitePoint = 1.0;
@@ -213,7 +217,7 @@ function WebGLRenderer( parameters ) {
 	var _gl;
 
 	try {
-
+		//参数 WebGLContextAttributes 不是强制性的。此参数提供接受布尔值，如下面列出各种选项 -
 		var contextAttributes = {
 			alpha: _alpha,
 			depth: _depth,
@@ -277,8 +281,10 @@ function WebGLRenderer( parameters ) {
 		extensions.get( 'OES_standard_derivatives' );
 		extensions.get( 'ANGLE_instanced_arrays' );
 
+		//adds support for gl.UNSIGNED_INT types
+		//应用场景 gl.drawElements(gl.POINTS, 8, gl.UNSIGNED_INT, 0);
 		if ( extensions.get( 'OES_element_index_uint' ) ) {
-
+			//32位能表示的最大整数是2^32 - 1 = 4294967295，否则MaxIndex就是2的16次方减1 = 65535
 			BufferGeometry.MaxIndex = 4294967296;
 
 		}

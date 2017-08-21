@@ -51,6 +51,7 @@ PerspectiveCamera.prototype = Object.assign( Object.create( Camera.prototype ), 
 		this.focus = source.focus;
 
 		this.aspect = source.aspect;
+		//setViewOffset。This is useful for multi-window or multi-monitor/multi-machine setups.
 		this.view = source.view === null ? null : Object.assign( {}, source.view );
 
 		this.filmGauge = source.filmGauge;
@@ -172,6 +173,8 @@ PerspectiveCamera.prototype = Object.assign( Object.create( Camera.prototype ), 
 	updateProjectionMatrix: function () {
 
 		var near = this.near,
+			//Mathf.Deg2Rad。度到弧度的转化常量，等于(PI * 2) / 360
+			//fov垂直方向上的视觉角度
 			top = near * Math.tan(
 					_Math.DEG2RAD * 0.5 * this.fov ) / this.zoom,
 			height = 2 * top,

@@ -14,8 +14,9 @@ function Camera() {
 	Object3D.call( this );
 
 	this.type = 'Camera';
-
+	//webgl中的u_ViewMatrix
 	this.matrixWorldInverse = new Matrix4();
+	//webgl中的u_ProjMatrix
 	this.projectionMatrix = new Matrix4();
 
 }
