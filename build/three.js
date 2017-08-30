@@ -4812,7 +4812,7 @@
 
 
 	// Static interface
-
+	var count = 0;
 	WebGLUniforms.upload = function ( gl, seq, values, renderer ) {
 
 		for ( var i = 0, n = seq.length; i !== n; ++ i ) {
@@ -4821,7 +4821,7 @@
 				v = values[ u.id ];
 
 			if ( v.needsUpdate !== false ) {
-
+				count++;
 				// note: always updating when .needsUpdate is undefined
 				u.setValue( gl, v.value, renderer );
 

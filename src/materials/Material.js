@@ -88,7 +88,8 @@ Object.assign( Material.prototype, EventDispatcher.prototype, {
 
 			// for backward compatability if shading is set in the constructor
 			if ( key === 'shading' ) {
-
+				//flatShading平面着色是最简单也是最快速的着色方法，每个多边形(polygon)都会被指定一个单一且没有变化的颜色。
+				//这种方法虽然会产生出不真实的效果，不过它非常适用于快速成像及其他要求速度重于细致度的场合 ，
 				console.warn( 'THREE.' + this.type + ': .shading has been removed. Use the boolean .flatShading instead.' );
 				this.flatShading = ( newValue === FlatShading ) ? true : false;
 				continue;

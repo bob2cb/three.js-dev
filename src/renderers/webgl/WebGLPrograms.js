@@ -72,7 +72,7 @@ function WebGLPrograms( renderer, capabilities ) {
 		}
 
 	}
-
+	//得到图片的编码方式，线性编码还是gamma编码
 	function getTextureEncodingFromMap( map, gammaOverrideLinear ) {
 
 		var encoding;
@@ -184,7 +184,7 @@ function WebGLPrograms( renderer, capabilities ) {
 
 			numClippingPlanes: nClipPlanes,
 			numClipIntersection: nClipIntersection,
-
+			//Dithering (抖动显示) 它是一种欺骗你眼睛，使用有限的色彩让你看到比实际图象更多色彩的显示方式。
 			dithering: material.dithering,
 
 			shadowMapEnabled: renderer.shadowMap.enabled && object.receiveShadow && lights.shadows.length > 0,

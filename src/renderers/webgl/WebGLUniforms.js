@@ -363,11 +363,12 @@ function getPureArraySetter( type ) {
 }
 
 // --- Uniform Classes ---
-
+//基准uniform，
 function SingleUniform( id, activeInfo, addr ) {
 
 	this.id = id;
 	this.addr = addr;
+	//例：id = modelviewMatrix时，activeInfo.type = 35676（FLOAT_MAT4）
 	this.setValue = getSingularSetter( activeInfo.type );
 
 	// this.path = activeInfo.name; // DEBUG
@@ -384,7 +385,7 @@ function PureArrayUniform( id, activeInfo, addr ) {
 	// this.path = activeInfo.name; // DEBUG
 
 }
-
+//组合uniform，里面嵌套了多个基准uniform
 function StructuredUniform( id ) {
 
 	this.id = id;
@@ -427,7 +428,7 @@ StructuredUniform.prototype.setValue = function ( gl, value ) {
 
 
 //[]内的内容只匹配一个字符,([\w\d])和(\w)的意义应该是一样的?
-//添加分组界符(),匹配结果数组的第一个元素是匹配内容 第二个元素是捕获组1捕获的内容
+//添加分组界符(),匹配结果数组的第一个元素是匹配内容 后面元素是各捕获组捕获的内容
 var RePathPart = /([\w\d_]+)(\])?(\[|\.)?/g;
 
 // extracts

@@ -91,7 +91,14 @@ function WebGLRenderer( parameters ) {
 	this.localClippingEnabled = false;
 
 	// physically based shading
-
+	//gamma是什么：https://www.zhihu.com/question/27467127
+	//理解gamma校正：http://blog.csdn.net/vola9527/article/details/43198591
+	//广义Gamma实际上描述的就是自然现实的物理量和主观视觉灰阶的映射关系。这个关系是非线性映射
+	//gamma校正存在的本质原因是：是受限于有限存储空间及渲染带宽，需要在整个图像的流转各级转换中尽可能保留暗部细节，以满足人眼对暗部敏感的需求。
+	//gamma值就是对动态范围内亮度的非线性存储/还原算法
+	//Gamma=1，斜45°直线，不校正，输出=输入；
+	//Gamma大于1，曲线下压，输出值小于输入值；
+	//Gamma小于1，曲线上拱，输出值大于输入值。
 	this.gammaFactor = 2.0;	// for backwards compatibility
 	this.gammaInput = false;
 	this.gammaOutput = false;
@@ -2319,6 +2326,8 @@ function WebGLRenderer( parameters ) {
 				uniforms.direction.setFromMatrixPosition( light.matrixWorld );
 				_vector3.setFromMatrixPosition( light.target.matrixWorld );
 				uniforms.direction.sub( _vector3 );
+				//通过参数(一个Matrix4投射矩阵的3x3子集)转换这个向量的方向。
+				//已经有position,并指向target，不明白为什么还需要转换方向
 				uniforms.direction.transformDirection( viewMatrix );
 
 				uniforms.shadow = light.castShadow;

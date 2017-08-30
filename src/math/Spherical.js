@@ -9,7 +9,8 @@ import { _Math } from './Math';
  * The poles (phi) are at the positive and negative y axis.
  * The equator starts at positive z.
  */
-
+//theta环绕赤道，就是x-z平面上的夹角，始于z轴（0-360度）；
+//phi朝向y轴的正反方向，正方向上与y轴的夹角（0-180度）
 function Spherical( radius, phi, theta ) {
 
 	this.radius = ( radius !== undefined ) ? radius : 1.0;

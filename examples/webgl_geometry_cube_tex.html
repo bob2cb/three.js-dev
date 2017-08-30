@@ -14,10 +14,10 @@
 	</head>
 	<body>
 
-		<script src="../build/three_simple_cube.js"></script>
-
+		<script src="../build/three_simple_cube_tex.js"></script>
+		<!--script src="../build/three.js"></script-->
 		<script>
-
+			var resPath = "http://127.0.0.1/threejs/examples/"
 			var camera, scene, renderer;
 			var mesh;
 
@@ -31,14 +31,14 @@
 
 				scene = new THREE.Scene();
 
-				//var texture = new THREE.TextureLoader().load( 'textures/crate.gif' );
+				var texture = new THREE.TextureLoader().load( resPath + 'textures/crate.gif' );
 
 				//var geometry = new THREE.BoxBufferGeometry( 300, 200, 100 );
 				var geometry = new THREE.BoxGeometry( 300, 200, 100 );
-				//var material = new THREE.MeshBasicMaterial( { map: texture } );
+				var material = new THREE.MeshBasicMaterial( { map: texture } );
 
-				//mesh = new THREE.Mesh( geometry, material );
-				mesh = new THREE.Mesh( geometry );
+				mesh = new THREE.Mesh( geometry, material );
+				//mesh = new THREE.Mesh( geometry );
 				scene.add( mesh );
 
 				renderer = new THREE.WebGLRenderer();

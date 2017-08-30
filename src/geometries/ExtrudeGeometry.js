@@ -129,17 +129,19 @@ ExtrudeBufferGeometry.prototype.addShape = function ( shape, options ) {
 
 	var placeholder = [];
 
-
+	//amount拉伸的高度
 	var amount = options.amount !== undefined ? options.amount : 100;
-
+	//bevelThickness指定斜角的深度。斜角指前后面和拉伸体之间的倒角。倒角的厚度
 	var bevelThickness = options.bevelThickness !== undefined ? options.bevelThickness : 6; // 10
+	//bevelSize。how far from shape outline is bevel斜角的高度，从截面外轮廓倒角的尺寸
 	var bevelSize = options.bevelSize !== undefined ? options.bevelSize : bevelThickness - 2; // 8
+	//bevelSegments倒角部分的细分线段数
 	var bevelSegments = options.bevelSegments !== undefined ? options.bevelSegments : 3;
-
+	//bevelEnabled为true，就会有斜角
 	var bevelEnabled = options.bevelEnabled !== undefined ? options.bevelEnabled : true; // false
-
+	//curveSegments每一段曲线上的顶点数量
 	var curveSegments = options.curveSegments !== undefined ? options.curveSegments : 12;
-
+	//steps。number of points for z-side extrusions定义拉伸体被分成多少段
 	var steps = options.steps !== undefined ? options.steps : 1;
 
 	var extrudePath = options.extrudePath;
